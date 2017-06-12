@@ -13,7 +13,7 @@ args = parser.parse_args()
 
 tau = args.refresh_period
 
-numLEDs = 64
+numLEDs = 128
 client = opc.Client('localhost:7890')
 
 black = [ (0,0,0) ] * numLEDs
@@ -32,7 +32,8 @@ signal.signal(signal.SIGINT, sigint_handler)
 
 while True:
     g = np.floor(np.random.rand(numLEDs, 3) * 255)
-    sleepTime = tau + np.random.random_sample()
+    sleepTime = tau
+    #+ np.random.random_sample()
 
     client.put_pixels(g)
     time.sleep(sleepTime)
